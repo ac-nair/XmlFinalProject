@@ -1,0 +1,573 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="europeCountries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="country" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element type="xs:string" name="localname" minOccurs="0"/>
+              <xs:element name="population" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:int">
+                      <xs:attribute type="xs:string" name="measured" use="optional"/>
+                      <xs:attribute type="xs:short" name="year" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="population_growth" minOccurs="0"/>
+              <xs:element type="xs:float" name="infant_mortality" minOccurs="0"/>
+              <xs:element type="xs:int" name="gdp_total" minOccurs="0"/>
+              <xs:element type="xs:float" name="gdp_agri" minOccurs="0"/>
+              <xs:element type="xs:float" name="gdp_ind" minOccurs="0"/>
+              <xs:element type="xs:float" name="gdp_serv" minOccurs="0"/>
+              <xs:element type="xs:float" name="inflation" minOccurs="0"/>
+              <xs:element type="xs:float" name="unemployment" minOccurs="0"/>
+              <xs:element name="indep_date" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:date">
+                      <xs:attribute type="xs:string" name="from" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="dependent" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="government"/>
+              <xs:element name="encompassed">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="continent" use="optional"/>
+                      <xs:attribute type="xs:float" name="percentage" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ethnicgroup" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:float" name="percentage" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="religion" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:float" name="percentage" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="language" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:float" name="percentage" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="border" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:float" name="length" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="city" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element type="xs:string" name="localname" minOccurs="0"/>
+                    <xs:element type="xs:float" name="latitude"/>
+                    <xs:element type="xs:float" name="longitude"/>
+                    <xs:element type="xs:float" name="elevation" minOccurs="0"/>
+                    <xs:element name="population" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:int">
+                            <xs:attribute type="xs:short" name="year" use="optional"/>
+                            <xs:attribute type="xs:string" name="measured" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="located_at" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="watertype" use="optional"/>
+                            <xs:attribute type="xs:string" name="lake" use="optional"/>
+                            <xs:attribute type="xs:string" name="sea" use="optional"/>
+                            <xs:attribute type="xs:string" name="river" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="located_on" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="island" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="id" use="optional"/>
+                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="province" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element type="xs:string" name="localname" minOccurs="0"/>
+                    <xs:element type="xs:int" name="area"/>
+                    <xs:element name="population" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:int">
+                            <xs:attribute type="xs:string" name="measured" use="optional"/>
+                            <xs:attribute type="xs:short" name="year" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="city" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                          <xs:element type="xs:string" name="name"/>
+                          <xs:element type="xs:string" name="localname"/>
+                          <xs:element type="xs:float" name="latitude"/>
+                          <xs:element type="xs:float" name="longitude"/>
+                          <xs:element type="xs:float" name="elevation"/>
+                          <xs:element name="population">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:int">
+                                  <xs:attribute type="xs:short" name="year" use="optional"/>
+                                  <xs:attribute type="xs:string" name="measured" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="located_at">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="watertype" use="optional"/>
+                                  <xs:attribute type="xs:string" name="sea" use="optional"/>
+                                  <xs:attribute type="xs:string" name="river" use="optional"/>
+                                  <xs:attribute type="xs:string" name="lake" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="located_on">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="island" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:choice>
+                        <xs:attribute type="xs:string" name="id" use="optional"/>
+                        <xs:attribute type="xs:string" name="country" use="optional"/>
+                        <xs:attribute type="xs:string" name="province" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="id" use="optional"/>
+                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                  <xs:attribute type="xs:string" name="capital" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="car_code" use="optional"/>
+            <xs:attribute type="xs:float" name="area" use="optional"/>
+            <xs:attribute type="xs:string" name="capital" use="optional"/>
+            <xs:attribute type="xs:string" name="memberships" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="continent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:int" name="area"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="organization" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:string" name="abbrev"/>
+              <xs:element type="xs:date" name="established" minOccurs="0"/>
+              <xs:element name="members" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="type" use="optional"/>
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="headq" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sea" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:int" name="area" minOccurs="0"/>
+              <xs:element type="xs:short" name="depth" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="bordering" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="river" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="through" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="lake" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="to" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="watertype" use="optional"/>
+                      <xs:attribute type="xs:string" name="water" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="area" minOccurs="0"/>
+              <xs:element type="xs:float" name="length"/>
+              <xs:element name="source" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="mountains" minOccurs="0"/>
+                    <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="country" use="optional"/>
+                            <xs:attribute type="xs:string" name="province" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="from" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="watertype" use="optional"/>
+                            <xs:attribute type="xs:string" name="water" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:float" name="latitude"/>
+                    <xs:element type="xs:float" name="longitude"/>
+                    <xs:element type="xs:float" name="elevation" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="estuary" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="country" use="optional"/>
+                            <xs:attribute type="xs:string" name="province" use="optional"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:float" name="latitude"/>
+                    <xs:element type="xs:float" name="longitude"/>
+                    <xs:element type="xs:float" name="elevation" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="island" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="lake" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="to" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="watertype" use="optional"/>
+                      <xs:attribute type="xs:string" name="water" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="area"/>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:float" name="longitude"/>
+              <xs:element type="xs:float" name="elevation"/>
+              <xs:element type="xs:float" name="depth" minOccurs="0"/>
+              <xs:element type="xs:short" name="height" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="type" use="optional"/>
+            <xs:attribute type="xs:string" name="island" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="island" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element type="xs:string" name="islands" minOccurs="0"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="area"/>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:float" name="longitude"/>
+              <xs:element type="xs:float" name="elevation"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="sea" use="optional"/>
+            <xs:attribute type="xs:string" name="type" use="optional"/>
+            <xs:attribute type="xs:string" name="lake" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="mountain" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element type="xs:string" name="mountains" minOccurs="0"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:float" name="longitude"/>
+              <xs:element type="xs:short" name="elevation"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="island" use="optional"/>
+            <xs:attribute type="xs:string" name="type" use="optional"/>
+            <xs:attribute type="xs:date" name="last_eruption" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="desert" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element name="located" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="country" use="optional"/>
+                      <xs:attribute type="xs:string" name="province" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:int" name="area"/>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:byte" name="longitude"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="id" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+            <xs:attribute type="xs:string" name="type" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="airport" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:float" name="latitude"/>
+              <xs:element type="xs:float" name="longitude"/>
+              <xs:element type="xs:short" name="elevation"/>
+              <xs:element type="xs:byte" name="gmtOffset"/>
+              <xs:element name="located_on" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="island" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="iatacode" use="optional"/>
+            <xs:attribute type="xs:string" name="city" use="optional"/>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+              <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+                    <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="name" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+                                <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="name" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:string" name="country" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="langtree" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element type="xs:string" name="name" maxOccurs="unbounded" minOccurs="0"/>
+                                          </xs:sequence>
+                                          <xs:attribute type="xs:string" name="country" use="optional"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:string" name="country" use="optional"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="country" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="spokenby" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="xs:string" name="name"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="country" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="spokenby" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="name"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="country" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="country" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

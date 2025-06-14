@@ -1,0 +1,54 @@
+<!DOCTYPE europeCountries [
+<!ELEMENT europeCountries (country+)>
+<!ELEMENT country (name, localname, population*, population_growth?, infant_mortality?, gdp_total?, gdp_agri?, gdp_ind?, gdp_serv?, inflation?, unemployment?, indep_date?, government?, encompassed?, ethnicgroup*, religion*, language*, border*, city*, province*)>
+<!ATTLIST country car_code CDATA #REQUIRED area CDATA #REQUIRED capital CDATA #IMPLIED memberships CDATA #IMPLIED>
+
+<!ELEMENT province (name, localname?, area, population*, city+)>
+<!ATTLIST province id CDATA #REQUIRED country CDATA #REQUIRED capital CDATA #REQUIRED>
+
+<!ELEMENT city (name+, localname?, latitude, longitude, elevation, population*, located_at*, located_on?)>
+<!ATTLIST city id CDATA #REQUIRED country CDATA #REQUIRED province CDATA #IMPLIED>
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT localname (#PCDATA)>
+<!ELEMENT population (#PCDATA)>
+<!ATTLIST population year CDATA #REQUIRED measured CDATA #IMPLIED>
+
+<!ELEMENT population_growth (#PCDATA)>
+<!ELEMENT infant_mortality (#PCDATA)>
+<!ELEMENT gdp_total (#PCDATA)>
+<!ELEMENT gdp_agri (#PCDATA)>
+<!ELEMENT gdp_ind (#PCDATA)>
+<!ELEMENT gdp_serv (#PCDATA)>
+<!ELEMENT inflation (#PCDATA)>
+<!ELEMENT unemployment (#PCDATA)>
+
+<!ELEMENT indep_date (#PCDATA)>
+<!ATTLIST indep_date from CDATA #IMPLIED>
+
+<!ELEMENT government (#PCDATA)>
+<!ELEMENT encompassed EMPTY>
+<!ATTLIST encompassed continent CDATA #REQUIRED percentage CDATA #REQUIRED>
+
+<!ELEMENT ethnicgroup (#PCDATA)>
+<!ATTLIST ethnicgroup percentage CDATA #REQUIRED>
+
+<!ELEMENT religion (#PCDATA)>
+<!ATTLIST religion percentage CDATA #REQUIRED>
+
+<!ELEMENT language (#PCDATA)>
+<!ATTLIST language percentage CDATA #REQUIRED>
+
+<!ELEMENT border EMPTY>
+<!ATTLIST border country CDATA #REQUIRED length CDATA #REQUIRED>
+
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+<!ELEMENT elevation (#PCDATA)>
+
+<!ELEMENT located_at EMPTY>
+<!ATTLIST located_at watertype CDATA #REQUIRED sea CDATA #IMPLIED river CDATA #IMPLIED lake CDATA #IMPLIED>
+
+<!ELEMENT located_on EMPTY>
+<!ATTLIST located_on island CDATA #REQUIRED>
+]>
