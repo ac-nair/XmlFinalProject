@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h2>Country, Capital, Unemployment, Total GDP</h2>
+    <div id="table"></div>
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "ITC5202-dataset.xml", false);
+        xhttp.send();
+        var xmlDoc = xhttp.responseXML;
+
+        var countries = xmlDoc.getElementsByTagName("country");
+
+        var output = "<table border='1'><tr><th>Country</th><th>Capital</th><th>Unemployment (%)</th><th>GDP Total</th></tr>";
+
+        for (var i = 0; i < countries.length; i++) {
+            var country = countries[i];
+            var nameNode = country.getElementsByTagName("name")[0];
+            var unemploymentNode = country.getElementsByTagName("unemployment")[0];
+            var gdpNode = country.getElementsByTagName("gdp_total")[0];
+
+            var capitalId = country.getAttribute("capital");
+            var capitalName = "-";
+
+            var cities = country.getElementsByTagName("city");
+            for (var j = 0; j < cities.length; j++) {
+                if (cities[j].getAttribute("id") === capitalId) {
+                    var nameTags = cities[j].getElementsByTagName("name");
+                    if (nameTags.length > 0) {
+                        capitalName = nameTags[0].childNodes[0].nodeValue;
+                    }
+                    break;
+                }
+            }
+
+            var name = nameNode ? nameNode.textContent : "-";
+            var unemployment = unemploymentNode ? unemploymentNode.textContent : "-";
+            var gdpTotal = gdpNode ? gdpNode.textContent : "-";
+
+            output += "<tr><td>" + name + "</td><td>" + capitalName + "</td><td>" + unemployment + "</td><td>" + gdpTotal + "</td></tr>";
+        }
+
+        output += "</table>";
+        document.getElementById("table").innerHTML = output;
+    </script>
+
+</body>
+</html>

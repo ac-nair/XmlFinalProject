@@ -8,11 +8,7 @@
     <html>
       <head>
         <title>European Countries Economic Data</title>
-        <style>
-          table { border-collapse: collapse; width: 80%; }
-          th, td { border: 1px solid black; padding: 8px; text-align: left; }
-          th { background-color: #f2f2f2; }
-        </style>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
       </head>
       <body>
         <h2>Country, Capital, Unemployment and GDP</h2>
@@ -26,12 +22,45 @@
 
           <xsl:for-each select="europeCountries/country">
             <tr>
-              <td><xsl:value-of select="name"/></td>
+              <!-- Country Name -->
               <td>
-                <xsl:value-of select="city[@id=current()/@capital]/name[1]"/>
+                <xsl:choose>
+                  <xsl:when test="name">
+                    <xsl:value-of select="name"/>
+                  </xsl:when>
+                  <xsl:otherwise>-</xsl:otherwise>
+                </xsl:choose>
               </td>
-              <td><xsl:value-of select="unemployment"/></td>
-              <td><xsl:value-of select="gdp_total"/></td>
+
+              <!-- Capital Name -->
+              <td>
+                <xsl:choose>
+                  <xsl:when test="city[@id=current()/@capital]/name">
+                    <xsl:value-of select="city[@id=current()/@capital]/name[1]"/>
+                  </xsl:when>
+                  <xsl:otherwise>-</xsl:otherwise>
+                </xsl:choose>
+              </td>
+
+              <!-- Unemployment -->
+              <td>
+                <xsl:choose>
+                  <xsl:when test="unemployment">
+                    <xsl:value-of select="unemployment"/>
+                  </xsl:when>
+                  <xsl:otherwise>-</xsl:otherwise>
+                </xsl:choose>
+              </td>
+
+              <!-- GDP Total -->
+              <td>
+                <xsl:choose>
+                  <xsl:when test="gdp_total">
+                    <xsl:value-of select="gdp_total"/>
+                  </xsl:when>
+                  <xsl:otherwise>-</xsl:otherwise>
+                </xsl:choose>
+              </td>
             </tr>
           </xsl:for-each>
         </table>

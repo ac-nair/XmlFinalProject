@@ -1,34 +1,28 @@
 <!DOCTYPE html> 
 <html>
     <head>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="style.css">
     </head>
 
 <body>
 
-    <p id="demo"></p>
+    <h2>2011 Populations over 70000 per Country</h2>
+    <div id="table"></div>
 
     <script>
-        // Create the XHR object
         var xhttp = new XMLHttpRequest();
-        // Open the XML file
         xhttp.open("GET", "ITC5202-dataset.xml", false);
-        // Send the request
         xhttp.send();
-        // Read XML data
         var xmlDoc = xhttp.responseXML;
 
-        // Get all <country> elements
         var countries = xmlDoc.getElementsByTagName("country");
 
-        // Start table
-        var output = "<table border='1'><caption>2011 Populations over 70000 per Country</caption><tr><th>Country</th><th>Population (2011)</th></tr>";
+        var output = "<table border='1'><tr><th>Country</th><th>Population (2011)</th></tr>";
 
         for (var i = 0; i < countries.length; i++) {
             var country = countries[i];
             var name = country.getElementsByTagName("name")[0].childNodes[0].nodeValue;
 
-            // Get all <population> elements in the current country
             var pops = country.getElementsByTagName("population");
             for (var j = 0; j < pops.length; j++) {
                 var yearAttr = pops[j].getAttribute("year");
@@ -42,7 +36,7 @@
         }
 
         output += "</table>";
-        document.getElementById("demo").innerHTML = output;
+        document.getElementById("table").innerHTML = output;
 
     </script>
 

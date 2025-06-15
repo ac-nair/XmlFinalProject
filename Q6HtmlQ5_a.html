@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+<body>
+
+    <h2>Countries with Industrial GDP > 11%</h2>
+    <div id="table"></div> 
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "ITC5202-dataset.xml", false);
+        xhttp.send();
+        var xmlDoc = xhttp.responseXML;
+
+        var countries = xmlDoc.getElementsByTagName("country");
+
+        var output = "<table border='1'><tr><th>Country</th><th>Industrial GDP (%)</th></tr>";
+
+        for (var i = 0; i < countries.length; i++) {
+            var country = countries[i];
+            var nameNode = country.getElementsByTagName("name")[0];
+            var gdpNode = country.getElementsByTagName("gdp_ind")[0];
+
+            if (nameNode && gdpNode) {
+                var name = nameNode.childNodes[0].nodeValue;
+                var gdpInd = parseFloat(gdpNode.childNodes[0].nodeValue);
+
+                if (gdpInd > 11) {
+                    output += "<tr><td>" + name + "</td><td>" + gdpInd + "</td></tr>";
+                }
+            }
+        }
+
+        output += "</table>";
+        document.getElementById("table").innerHTML = output;
+    </script>
+
+</body>
+</html>
