@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- <!DOCTYPE europeaCountries SYSTEM "ITC5202-dataset.dtd"> -->
-<europeCountries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ITC5202-dataset.xsd">
+<?xml-stylesheet type="text/xsl" href="ITC5202-dataset.xsl"?> 
+<!-- <europeCountries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ITC5202-dataset.xsd"> -->
+<europeCountries>
    <country car_code="AL"
              area="28750"
              capital="cty-Albania-Tirane"

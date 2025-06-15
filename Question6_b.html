@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+<body>
+
+    <p id="demo"></p>
+
+    <script>
+        // Create the XHR object
+        var xhttp = new XMLHttpRequest();
+        // Open the XML file
+        xhttp.open("GET", "ITC5202-dataset.xml", false);
+        // Send the request
+        xhttp.send();
+        // Read XML data
+        var xmlDoc = xhttp.responseXML;
+
+        // Get all <country> elements
+        var countries = xmlDoc.getElementsByTagName("country");
+
+        // Start table
+        var output = "<table border='1'><caption>2011 Populations over 70000 per Country</caption><tr><th>Country</th><th>Population (2011)</th></tr>";
+
+        for (var i = 0; i < countries.length; i++) {
+            var country = countries[i];
+            var name = country.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+
+            // Get all <population> elements in the current country
+            var pops = country.getElementsByTagName("population");
+            for (var j = 0; j < pops.length; j++) {
+                var yearAttr = pops[j].getAttribute("year");
+                if (yearAttr === "2011") {
+                    var population = parseInt(pops[j].childNodes[0].nodeValue);
+                    if (population > 70000) {
+                        output += "<tr><td>" + name + "</td><td>" + population + "</td></tr>";
+                    }
+                }
+            }
+        }
+
+        output += "</table>";
+        document.getElementById("demo").innerHTML = output;
+
+    </script>
+
+</body>
+
+</html>
