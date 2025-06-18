@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE europeaCountries SYSTEM "ITC5202-dataset.dtd"> -->
-<?xml-stylesheet type="text/xsl" href="ITC5202-dataset.xsl"?> 
+<!DOCTYPE europeaCountries SYSTEM "ITC5202-dataset.dtd">
+<!-- <?xml-stylesheet type="text/xsl" href="ITC5202-dataset.xsl"?>  -->
 <!-- <europeCountries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ITC5202-dataset.xsd"> -->
 <europeCountries>
    <country car_code="AL"
