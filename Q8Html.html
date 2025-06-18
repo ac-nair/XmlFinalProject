@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Country Report (XSLT Version)</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h2>Search Country Province/City Report (XSLT)</h2>
+  <input type="text" id="countryInput" placeholder="Enter partial country name">
+  <button onclick="loadReport()">Search</button>
+
+  <div id="output"></div>
+
+  <script>
+    function loadReport() {
+      const filterValue = document.getElementById("countryInput").value.toLowerCase();
+
+      const xmlRequest = new XMLHttpRequest();
+      xmlRequest.open("GET", "ITC5202-dataset.xml", false);
+      xmlRequest.send();
+      const xml = xmlRequest.responseXML;
+
+      const xslRequest = new XMLHttpRequest();
+      xslRequest.open("GET", "Q8Xsl.xsl", false);
+      xslRequest.send();
+      const xsl = xslRequest.responseXML;
+
+      // Apply XSLT with parameter
+      const xsltProcessor = new XSLTProcessor();
+      xsltProcessor.importStylesheet(xsl);
+      xsltProcessor.setParameter(null, "filter", filterValue);
+
+      const resultDocument = xsltProcessor.transformToFragment(xml, document);
+
+      const style = document.createElement("link");
+      style.rel = "stylesheet";
+      style.href = "style.css";
+      document.head.appendChild(style);
+
+      const output = document.getElementById("output");
+      output.innerHTML = ""; // Clear previous
+      output.appendChild(resultDocument);
+    }
+  </script>
+
+</body>
+</html>
