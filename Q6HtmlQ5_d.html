@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Largest Country by Area</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="result" id="output">Loading...</div>
+
+  <script>
+    window.onload = function () {
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("GET", "ITC5202-dataset.xml", false); 
+      xhttp.send();
+      var xmlDoc = xhttp.responseXML;
+
+      var countries = xmlDoc.getElementsByTagName("country");
+
+      var maxArea = 0;
+      var largestCountry = "";
+
+      for (var i = 0; i < countries.length; i++) {
+        var areaAttr = countries[i].getAttribute("area");
+        var name = countries[i].getElementsByTagName("name")[0].textContent;
+
+        if (areaAttr) {
+          var area = parseInt(areaAttr);
+          if (area > maxArea) {
+            maxArea = area;
+            largestCountry = name;
+          }
+        }
+      }
+
+      document.getElementById("output").innerHTML =
+        "Largest country among European Countries is <strong>" + largestCountry + "</strong>";
+    };
+  </script>
+
+</body>
+</html>
