@@ -8,14 +8,14 @@
 
   <h2>City Report by Country</h2>
 
-  <input type="text" id="countryInput" placeholder="Enter country name">
+  <input type="text" id="CountryName">
   <button onclick="showReport()">Search</button>
 
   <div id="output"></div>
 
   <script>
     function showReport() {
-      let input = document.getElementById("countryInput").value.toLowerCase().trim();
+      let input = document.getElementById("CountryName").value.toLowerCase().trim();
       let xhttp = new XMLHttpRequest();
       xhttp.open("GET", "ITC5202-dataset.xml", false);
       xhttp.send();
