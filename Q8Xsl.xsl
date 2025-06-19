@@ -3,71 +3,56 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
   <xsl:param name="filter"/>
-
   <xsl:output method="html" indent="yes"/>
 
   <xsl:template match="/">
     <html>
       <head>
-        <title>Country Province/City Report</title>  
+        <title>City Report</title>
       </head>
       <body>
         <xsl:for-each select="europeCountries/country[starts-with(translate(name, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), $filter)]">
-          <h2><xsl:value-of select="name"/></h2>
+          <h3><xsl:value-of select="name"/></h3>
+          <table border="1">
+            <tr>
+              <th>City Name</th>
+              <th>Province Name</th>
+              <th>Local Name</th>
+              <th>Population (2011)</th>
+              <th>No of Cities in Province</th>
+            </tr>
 
-          <xsl:choose>
-            <!-- If province exists -->
-            <xsl:when test="province">
-              <table>
+            <!-- If provinces exist -->
+            <xsl:for-each select="province">
+              <xsl:variable name="provName" select="name"/>
+              <xsl:variable name="local" select="localname"/>
+              <xsl:variable name="cityCount" select="count(city)"/>
+              <xsl:for-each select="city">
                 <tr>
-                  <th>Province Name</th>
-                  <th>Local Name</th>
-                  <th>Population (2011)</th>
-                  <th>No of Cities</th>
+                  <td><xsl:value-of select="name"/></td>
+                  <td><xsl:value-of select="$provName"/></td>
+                  <td><xsl:value-of select="$local"/></td>
+                  <td>
+                    <xsl:value-of select="population[@year='2011']"/>
+                  </td>
+                  <td><xsl:value-of select="$cityCount"/></td>
                 </tr>
-                <xsl:for-each select="province">
-                  <tr>
-                    <td><xsl:value-of select="name"/></td>
-                    <td><xsl:value-of select="localname"/></td>
-                    <td>
-                      <xsl:choose>
-                        <xsl:when test="population[@year='2011']">
-                          <xsl:value-of select="population[@year='2011']"/>
-                        </xsl:when>
-                        <xsl:otherwise>-</xsl:otherwise>
-                      </xsl:choose>
-                    </td>
-                    <td>
-                      <xsl:value-of select="count(city)"/>
-                    </td>
-                  </tr>
-                </xsl:for-each>
-              </table>
-            </xsl:when>
+              </xsl:for-each>
+            </xsl:for-each>
 
-            <!-- If no provinces, show cities -->
-            <xsl:otherwise>
-              <table>
+            <!-- If no province, show country-level cities -->
+            <xsl:if test="not(province)">
+              <xsl:for-each select="city">
                 <tr>
-                  <th>City Name</th>
-                  <th>Population (2011)</th>
+                  <td><xsl:value-of select="name"/></td>
+                  <td></td>
+                  <td></td>
+                  <td><xsl:value-of select="population[@year='2011']"/></td>
+                  <td>0</td>
                 </tr>
-                <xsl:for-each select="city">
-                  <tr>
-                    <td><xsl:value-of select="name"/></td>
-                    <td>
-                      <xsl:choose>
-                        <xsl:when test="population[@year='2011']">
-                          <xsl:value-of select="population[@year='2011']"/>
-                        </xsl:when>
-                        <xsl:otherwise>-</xsl:otherwise>
-                      </xsl:choose>
-                    </td>
-                  </tr>
-                </xsl:for-each>
-              </table>
-            </xsl:otherwise>
-          </xsl:choose>
+              </xsl:for-each>
+            </xsl:if>
+          </table>
         </xsl:for-each>
       </body>
     </html>

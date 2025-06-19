@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Country Province/City Report</title>
+  <title>City Report</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>Country Report</h2>
-  <input type="text" id="countryInput">
-  <button onclick="generateReport()">Search</button>
+  <h2>City Report by Country</h2>
 
-  <div id="result"></div>
+  <input type="text" id="countryInput" placeholder="Enter country name">
+  <button onclick="showReport()">Search</button>
+
+  <div id="output"></div>
 
   <script>
-    function generateReport() {
-      var xhttp = new XMLHttpRequest();
+    function showReport() {
+      let input = document.getElementById("countryInput").value.toLowerCase().trim();
+      let xhttp = new XMLHttpRequest();
       xhttp.open("GET", "ITC5202-dataset.xml", false);
       xhttp.send();
-      var xmlDoc = xhttp.responseXML;
+      let xml = xhttp.responseXML;
 
-      var input = document.getElementById("countryInput").value.trim().toLowerCase();
-      var countries = xmlDoc.getElementsByTagName("country");
+      let countries = xml.getElementsByTagName("country");
+      let result = "";
 
-      var output = "";
+      for (let i = 0; i < countries.length; i++) {
+        let country = countries[i];
+        let name = country.getElementsByTagName("name")[0].textContent;
 
-      for (var i = 0; i < countries.length; i++) {
-        var country = countries[i];
-        var countryName = country.getElementsByTagName("name")[0].textContent;
+        if (name.toLowerCase().startsWith(input)) {
+          let rows = "";
+          let provinces = country.getElementsByTagName("province");
 
-        if (countryName.toLowerCase().startsWith(input)) {
-          output += "<h3>" + countryName + "</h3>";
-
-          var provinces = country.getElementsByTagName("province");
           if (provinces.length > 0) {
-            output += "<table><tr><th>Province Name</th><th>Local Name</th><th>Population (2011)</th><th>No of Cities</th></tr>";
+            for (let j = 0; j < provinces.length; j++) {
+              let prov = provinces[j];
+              let provName = prov.getElementsByTagName("name")[0]?.textContent || "";
+              let localName = prov.getElementsByTagName("localname")[0]?.textContent || "";
+              let cities = prov.getElementsByTagName("city");
+              let count = cities.length;
 
-            for (var j = 0; j < provinces.length; j++) {
-              var prov = provinces[j];
-              var provName = prov.getElementsByTagName("name")[0].textContent;
-              var localName = prov.getElementsByTagName("localname")[0]?.textContent || "-";
+              for (let c = 0; c < cities.length; c++) {
+                let city = cities[c];
+                let cityName = city.getElementsByTagName("name")[0]?.textContent || "";
+                let pop = "";
 
-              var pop2011 = "-";
-              var pops = prov.getElementsByTagName("population");
-              for (var p = 0; p < pops.length; p++) {
-                if (pops[p].getAttribute("year") === "2011") {
-                  pop2011 = pops[p].textContent;
-                  break;
-                }
-              }
-
-              var cityCount = prov.getElementsByTagName("city").length;
-
-              output += "<tr><td>" + provName + "</td><td>" + localName + "</td><td>" + pop2011 + "</td><td>" + cityCount + "</td></tr>";
-            }
-
-            output += "</table><br>";
-          } 
-          else 
-          {
-            // No provinces - display cities directly
-            var cities = country.getElementsByTagName("city");
-            if (cities.length > 0) {
-              output += "<table><tr><th>City Name</th><th>Population (2011)</th></tr>";
-              for (var c = 0; c < cities.length; c++) {
-                var city = cities[c];
-                var nameTag = city.getElementsByTagName("name")[0];
-                var pop2011 = "-";
-                var pops = city.getElementsByTagName("population");
-
-                for (var p = 0; p < pops.length; p++) {
+                let pops = city.getElementsByTagName("population");
+                for (let p = 0; p < pops.length; p++) {
                   if (pops[p].getAttribute("year") === "2011") {
-                    pop2011 = pops[p].textContent;
+                    pop = pops[p].textContent;
                     break;
                   }
                 }
 
-                output += "<tr><td>" + nameTag.textContent + "</td><td>" + pop2011 + "</td></tr>";
+                rows += "<tr><td>" + cityName + "</td><td>" + provName + "</td><td>" + localName + "</td><td>" + pop + "</td><td>" + count + "</td></tr>";
               }
-              output += "</table><br>";
-            } else {
-              output += "<p>No provinces or cities available.</p>";
             }
+          } else {
+            let cities = country.getElementsByTagName("city");
+
+            for (let c = 0; c < cities.length; c++) {
+              let city = cities[c];
+              let cityName = city.getElementsByTagName("name")[0]?.textContent || "";
+              let pop = "";
+
+              let pops = city.getElementsByTagName("population");
+              for (let p = 0; p < pops.length; p++) {
+                if (pops[p].getAttribute("year") === "2011") {
+                  pop = pops[p].textContent;
+                  break;
+                }
+              }
+
+              rows += "<tr><td>" + cityName + "</td><td></td><td></td><td>" + pop + "</td><td>0</td></tr>";
+            }
+          }
+
+          if (rows !== "") {
+            result += "<h3>" + name + "</h3>";
+            result += "<table><tr><th>City Name</th><th>Province Name</th><th>Local Name</th><th>Population (2011)</th><th>No of Cities in Province</th></tr>";
+            result += rows;
+            result += "</table>";
           }
         }
       }
 
-      document.getElementById("result").innerHTML = output || "<p>No matching country found.</p>";
+      document.getElementById("output").innerHTML = result || "<p>No country found.</p>";
     }
   </script>
 

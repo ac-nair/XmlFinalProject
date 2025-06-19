@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Country Report (XSLT Version)</title>
-   <link rel="stylesheet" href="style.css">
+  <title>Country Report with XSLT</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>Search Country Province/City Report (XSLT)</h2>
-  <input type="text" id="countryInput" placeholder="Enter partial country name">
+  <h2>Country Report (XSLT)</h2>
+
+  <input type="text" id="CountryName" placeholder="Enter country name">
   <button onclick="loadReport()">Search</button>
 
   <div id="output"></div>
 
   <script>
     function loadReport() {
-      const filterValue = document.getElementById("countryInput").value.toLowerCase();
+      let country = document.getElementById("CountryName").value.toLowerCase();
 
-      const xmlRequest = new XMLHttpRequest();
-      xmlRequest.open("GET", "ITC5202-dataset.xml", false);
-      xmlRequest.send();
-      const xml = xmlRequest.responseXML;
+      let xmlReq = new XMLHttpRequest();
+      xmlReq.open("GET", "ITC5202-dataset.xml", false);
+      xmlReq.send();
+      let xml = xmlReq.responseXML;
 
-      const xslRequest = new XMLHttpRequest();
-      xslRequest.open("GET", "Q8Xsl.xsl", false);
-      xslRequest.send();
-      const xsl = xslRequest.responseXML;
+      let xslReq = new XMLHttpRequest();
+      xslReq.open("GET", "Q8Xsl.xsl", false);
+      xslReq.send();
+      let xsl = xslReq.responseXML;
 
-      // Apply XSLT with parameter
-      const xsltProcessor = new XSLTProcessor();
-      xsltProcessor.importStylesheet(xsl);
-      xsltProcessor.setParameter(null, "filter", filterValue);
+      let processor = new XSLTProcessor();
+      processor.importStylesheet(xsl);
+      processor.setParameter(null, "filter", country);
 
-      const resultDocument = xsltProcessor.transformToFragment(xml, document);
+      let result = processor.transformToFragment(xml, document);
 
-      const style = document.createElement("link");
-      style.rel = "stylesheet";
-      style.href = "style.css";
-      document.head.appendChild(style);
-
-      const output = document.getElementById("output");
-      output.innerHTML = ""; // Clear previous
-      output.appendChild(resultDocument);
+      document.getElementById("output").innerHTML = "";
+      document.getElementById("output").appendChild(result);
     }
   </script>
 
